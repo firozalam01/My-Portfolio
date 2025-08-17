@@ -6,28 +6,26 @@ var typed= new Typed(".text", {
     loop:true
 });
 
-// // Mobile menu toggle
-document.querySelector('.menu-toggle').addEventListener('click', function() {
-    document.querySelector('.dropdown-menu').classList.toggle('active');
-});
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
+// Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.navbar');
         
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fa-solid fa-xmark"></i>' 
+                : '<i class="fa-solid fa-bars"></i>';
         });
         
-        // Close mobile menu if open
-        document.querySelector('.dropdown-menu').classList.remove('active');
-    });
-});
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            });
+        });
+
+
  // Header scroll effect
         const header = document.getElementById('header');
         
@@ -115,20 +113,6 @@ observer.observe(document.querySelector('.skills'));
     });
 });
 
-// // menu Toggle
-
-// const menuToggle = document.querySelector('.menu-toggle');
-// const menuToggleIcon = document.querySelector('.menu-toggle i');
-// const dropdownMenu = document.querySelector('.dropdown-menu');
-
-// menuToggle.onclick = function() {
-//     dropdownMenu.classList.toggle('open');
-//     const isOpen = dropdownMenu.classList.contains('open');
-    
-//     menuToggleIcon.classList = isOpen 
-//         ? 'fa-solid fa-xmark' 
-//         : 'fa-solid fa-bars';
-// };
 
 // Portfolio filtering
         const filterButtons = document.querySelectorAll('.filter-btn');
